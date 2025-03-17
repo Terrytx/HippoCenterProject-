@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理員儀表板</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4A6741;
+
+            --secondary-color: #8AA682;
+
+            --hover-color: #C2D5BB;
+
+            --background-color: #F5F7F4;
+
+            --text-primary: #2C3E2D;
+
+            --text-secondary: #5C715E;
+
+            --border-color: #D8E0D5;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--hover-color);
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .user-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .sidebar-nav {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-notification {
+            position: relative;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #D64045;
+            color: white;
+            border-radius: 50%;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-bar input {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            min-width: 200px;
+            background-color: white;
+        }
+
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(74, 103, 65, 0.1);
+            display: flex;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-icon {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-details h3 {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- 左側選單 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="avatar">
+                    <img src="/api/placeholder/50/50" alt="用戶頭像">
+                </div>
+                <div class="user-info">
+                    <h3>管理員名稱</h3>
+                    <p>系統管理員</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-compass"></i>
+                    導覽管理
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-tv"></i>
+                    節目管理
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-key"></i>
+                    租借管理
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-store"></i>
+                    商店管理
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    會員管理
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-newspaper"></i>
+                    最新消息
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    常見問題
+                </a>
+            </nav>
+        </aside>
+
+        <!-- 主要內容區 -->
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h2>導覽管理</h2>
+                <div class="header-actions">
+                    <button class="btn-notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="search-bar">
+                        <input type="text" placeholder="搜尋...">
+                        <button>
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 內容區域 -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>今日參觀人數</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold;">1,234</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>導覽場次</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold;">15</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>滿意度評分</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold;">4.8</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
