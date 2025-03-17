@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "EcpayCheckoutTest",
+            "request": "launch",
+            "mainClass": "tw.com.hippo_center_backend.test.EcpayCheckoutTest",
+            "projectName": "hippo-center-backend"
+        },
+        {
+            "type": "java",
+            "name": "EcpayTest",
+            "request": "launch",
+            "mainClass": "tw.com.hippo_center_backend.test.EcpayTest",
+            "projectName": "hippo-center-backend"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HippoCenterBackendApplication<hippo-center-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "tw.com.hippo_center_backend.HippoCenterBackendApplication",
+            "projectName": "hippo-center-backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

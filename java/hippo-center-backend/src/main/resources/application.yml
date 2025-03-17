@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: hippo-center
+
+  profiles:
+    active: '@xxxx@'
+
+  mail:
+    host: smtp.gmail.com  # 郵件伺服器的主機名稱或 IP 地址
+    port: 587               # 連接到郵件伺服器使用的端口號
+    username: hippoboy321@gmail.com  # 用來驗證 SMTP 伺服器的用戶名
+    password: hvlm oemv cwya jyli         # 用來驗證 SMTP 伺服器的密碼
+    protocol: smtp           # 使用的協議（SMTP 是發送郵件的標準協議）
+    properties:              # 用來配置郵件發送的額外屬性
+      mail.smtp.auth: true          # 啟用身份驗證
+      mail.smtp.starttls.enable: true   # 啟用 STARTTLS 加密
+      mail.smtp.starttls.required: true  # 強制使用 STARTTLS
+
+  #資料庫連線設定
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;database=hippocenter;trustServerCertificate=true
+    username: sa
+    password: P@ssw0rd
+
+  #Hibernate/JPA的相關設定
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+      ddl-auto: validate
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+        hibernate:
+          format:
+          sql: true
+          connection:
+            characterEncoding: utf8
+            useUnicode: true
+            charSet: utf8
+  web:
+    resources:
+      static-locations: file:/C:/image/
+  #conosle顏色
+  output:
+    ansi:
+      enabled: always
+
+  jackson:
+    date-format: "yyyy-MM-dd"
+    time-zone: Asia/Taipei
+
+jwt:
+  token:
+    expire: 300
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+file:
+  storage:
+    images:
+      root-path: "C:\\JavaFramework\\sts-workspace\\20250117\\HippoCityProjectBackend\\hippo-center-backend\\src\\main\\resources\\testphoto"
+      upload-path: "upload"  # 或者 "uploaded"
+      category-paths:
+# 上傳路徑配置
+upload:
+  path: src/main/resources/static/images

@@ -1,0 +1,19 @@
+@import '@/assets/fonts/font.css';
+
+.main-content {
+
+    position: relative;
+    margin-left: auto;
+    width: 77%;
+    align-items: center;
+
+
+}
+
+h3 {
+    font-family: 'NotoSansTC-VariableFont';
+    font-size: 36px;
+    font-weight: 1000;
+    text-shadow: 1px 1px 1px #e5e5e5;
+    color: black;
+}

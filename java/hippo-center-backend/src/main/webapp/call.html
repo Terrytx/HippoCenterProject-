@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>綠界支付測試</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+	function formatDate(date) {
+	  const yyyy = date.getFullYear();
+	  const MM = String(date.getMonth() + 1).padStart(2, '0');
+	  const dd = String(date.getDate()).padStart(2, '0');
+	  const HH = String(date.getHours()).padStart(2, '0');
+	  const mm = String(date.getMinutes()).padStart(2, '0');
+	  const ss = String(date.getSeconds()).padStart(2, '0');
+	  
+	  return `${yyyy}/${MM}/${dd} ${HH}:${mm}:${ss}`;
+	}
+
+	function send() {
+	    const body = {
+			id: "iSpan"+Date.now(),
+			name: "iSpan測試商品 1",
+			total: "1000",
+			desc: "這是1個iSpan測試用交易",
+			date: formatDate(new Date())
+	    };
+
+	    axios.post("http://localhost:8080/pages/ecpay/send", body).then(function(response) {
+	        console.error("response", response);
+	        const container = document.getElementById("payment");
+	        container.innerHTML = response.data;
+	        eval(container.querySelector("script").textContent);
+	    }).catch(function(error) {
+	        console.error("error", error);
+	
+	        document.getElementById("payment").innerHTML = "<p>發生錯誤，請稍後再試。</p>";
+	    });
+
+	}
+</script>
+</head>
+<body>
+	<h2>綠界支付測試</h2>
+	<button onclick="send()">進行支付</button>
+	<div id="payment"></div>
+
+</body>
+</html>

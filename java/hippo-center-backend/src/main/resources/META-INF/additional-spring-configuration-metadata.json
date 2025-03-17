@@ -1,0 +1,29 @@
+{"properties": [
+  {
+    "name": "upload.path",
+    "type": "java.lang.String",
+    "description": "Path for file uploads."
+  },
+  {
+    "name": "file.storage.images.root-path",
+    "type": "java.lang.String",
+    "description": "A description for 'file.storage.images.root-path'"
+  },
+  {
+    "name": "file.storage.images.event",
+    "type": "java.lang.String",
+    "description": "A description for 'file.storage.images.event'"
+  },
+  {
+    "name": "file.storage.images.upload-path",
+    "type": "java.lang.String",
+    "description": "A description for 'file.storage.images.upload-path'"
+  },
+  {
+    "name": "file.storage.images.category-paths",
+    "type": "java.lang.String",
+    "description": "A description for 'file.storage.images.category-paths'"
+  }
+]}
+  
+ 
