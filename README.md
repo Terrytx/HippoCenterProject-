@@ -2,7 +2,7 @@
 
 本專案我主要負責節目瀏覽的前端與後端的部分
 
-## 負責本專案的前後端網頁開使用技術:
+## 負責本專案的前後端網頁開所使用技術:
 
 後端技術 (Spring Boot) Spring Boot 3.x - 構建後端應用 Spring MVC - 處理 API 請求 Spring Data JPA - 透過 Hibernate 操作 SQL Server
 -java(hippo-center-backend)後端Springboot程式
